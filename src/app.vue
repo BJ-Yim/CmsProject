@@ -36,7 +36,7 @@
         created(){
             connect.$on('addShopcart',num => {
                 // this.pickNum +=num
-                this.pickNum = this.pickNum + num;
+                this.pickNum = this.pickNum + num
             })
         }
     }
