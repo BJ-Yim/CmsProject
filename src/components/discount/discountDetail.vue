@@ -1,6 +1,6 @@
 <template>
     <div class="tmpl">
-        <nav-bar title="优惠详情"></nav-bar>
+        <nav-bar :title="title"></nav-bar>
         <div class="img-div">
             <img :src="prodInfo.img">
         </div>
@@ -52,13 +52,13 @@
                 prodInfo:{}, //商品信息
                 goodsDetailUrl:'',//商品详情轮播图url
                 time:'',
-                num:1
+                num:1,
+                title:''
             }
         },
         created(){
             //1:获取路由参数id
             let title = this.$route.query.title;
-            console.log(title)
             this.$ajax.all([
                 this.$ajax.get('timeprices',{
                 params:{
@@ -98,6 +98,16 @@
             afterEnter(){
                 this.isShow = false;//移除元素
             }
+        },
+        beforeRouteEnter(to,from,next){
+            let myTitle = '';
+            console.log(from)
+            if(from.name === 'discount.list'){
+                myTitle = '商品详情'
+            }
+            next(vm=>{
+                vm.title = myTitle;
+            })
         }
 
     }
