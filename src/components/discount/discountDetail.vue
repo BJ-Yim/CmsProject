@@ -116,7 +116,6 @@
 .ball-enter-active {
     animation: bounce-in .5s;
 }
-
 @keyframes bounce-in {
     0% {
         transform: translate3d(0, 0, 0);
