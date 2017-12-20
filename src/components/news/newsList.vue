@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="tmpl nav-top">
+        <div class="tmpl">
             <nav-bar title="新闻列表"></nav-bar>
             <!-- MUI 图文列表 -->
             <ul class="mui-table-view">

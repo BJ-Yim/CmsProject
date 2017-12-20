@@ -1,7 +1,8 @@
 <template>
 	<div>
-		
-		<router-view></router-view>
+		<transition name="router" mode="out-in">
+            <router-view></router-view>
+        </transition>
 		<!-- 底部 -->
 		<nav class="mui-bar mui-bar-tab">
             <router-link class="mui-tab-item" :to="{name:'home'}">
@@ -36,7 +37,7 @@
         created(){
             connect.$on('addShopcart',num => {
                 // this.pickNum +=num
-                this.pickNum = this.pickNum + num;
+                this.pickNum = this.pickNum + num
             })
         }
     }
