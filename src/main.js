@@ -8,12 +8,31 @@ import VueRouter from 'vue-router';
 //安装插件
 Vue.use(VueRouter);
 
-//Mint:引入mint-ui
-import Mint from 'mint-ui';
+// //Mint:引入mint-ui
+// import Mint from 'mint-ui';
+// //安装插件
+// Vue.use(Mint);
+
+// mint-ui 按需引入 开始
+import Header from 'mint-ui/lib/header';
+import Switch from 'mint-ui/lib/switch';
+import Swipe from 'mint-ui/lib/swipe';
+import SwipeItem from 'mint-ui/lib/swipe-item';
+import Lazyload from 'mint-ui/lib/lazyload';
+import Loadmore from 'mint-ui/lib/loadmore';
+import Indicator from 'mint-ui/lib/indicator';
+import Button from 'mint-ui/lib/button';
+Vue.component(Header.name, Header);
+Vue.component(Switch.name, Switch);
+Vue.component(Swipe.name, Swipe);
+Vue.component(SwipeItem.name, SwipeItem);
+Vue.component(Loadmore.name, Loadmore);
+Vue.component(Button.name, Button);
+Vue.use(Lazyload);
+// mint-ui 按需引入 结束
+
 //Mint:引入css
 import 'mint-ui/lib/style.css';
-//安装插件
-Vue.use(Mint);
 
 //引入mui样式
 import './static/vendor/mui/dist/css/mui.css';
@@ -55,7 +74,7 @@ Vue.component('mySwipe',MySwipe);  //使用要以my-Swipe
 //Axios:拦截器操作loadding
 Axios.interceptors.request.use(function(config){
 	//显示loading
-	Mint.Indicator.open({
+	Indicator.open({
 		text:'加载中...',
 		spinnerType:'fading-circle'
 	})
@@ -63,7 +82,7 @@ Axios.interceptors.request.use(function(config){
 })
 Axios.interceptors.response.use(function(config){
     //隐藏图标
-    Mint.Indicator.close();
+    Indicator.close();
     //获取到config中的data，进行加工
     return config;
 });
@@ -73,16 +92,28 @@ Axios.interceptors.response.use(function(config){
 
 //引入自己的vue文件开始
 import App from './app.vue';
-import Home from './components/home/home.vue';
-import Member from './components/member/member.vue';
-import Shopcart from './components/shopcart/shopcart.vue';
-import Search from './components/search/search.vue';
-import NewsList from './components/news/newsList.vue';
-import NewsDetail from './components/news/newsDetail.vue';
-import CasesList from './components/cases/casesList.vue';
-import CasesDetail from './components/cases/casesDetail.vue';
-import DiscountList from './components/discount/discountList.vue';
-import DiscountDetail from './components/discount/discountDetail.vue';
+//路由懒加载,按需加载
+const Home =r=>require(['./components/home/home.vue'],r);
+const Member =r=>require(['./components/member/member.vue'],r);
+const Shopcart =r=>require(['./components/shopcart/shopcart.vue'],r);
+const Search =r=>require(['./components/search/search.vue'],r);
+const NewsList =r=>require(['./components/news/newsList.vue'],r);
+const NewsDetail =r=>require(['./components/news/newsDetail.vue'],r);
+const CasesList =r=>require(['./components/cases/casesList.vue'],r);
+const CasesDetail =r=>require(['./components/cases/casesDetail.vue'],r);
+const DiscountList =r=>require(['./components/discount/discountList.vue'],r);
+const DiscountDetail =r=>require(['./components/discount/discountDetail.vue'],r);
+
+// import Home from './components/home/home.vue';
+// import Member from './components/member/member.vue';
+// import Shopcart from './components/shopcart/shopcart.vue';
+// import Search from './components/search/search.vue';
+// import NewsList from './components/news/newsList.vue';
+// import NewsDetail from './components/news/newsDetail.vue';
+// import CasesList from './components/cases/casesList.vue';
+// import CasesDetail from './components/cases/casesDetail.vue';
+// import DiscountList from './components/discount/discountList.vue';
+// import DiscountDetail from './components/discount/discountDetail.vue';
 //引入自己的vue文件结束
 
 //创建路由对象并配置路由规则
@@ -103,7 +134,7 @@ let router = new VueRouter({
 	]
 });
 
-
+console.log('起名字vendors')
 //创建vue实例
 new Vue({
 	el:'#app',
